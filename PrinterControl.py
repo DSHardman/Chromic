@@ -76,7 +76,20 @@ def main():
     waitforposition()
     takereading(targetforce)  # Press to desired force
     time.sleep(waittime)  # Wait for desired time
+
+    # Optional: trace X onto surface
+    Ender.write(str.encode("G1 X" + str(centreposition[0] + 10) + "E" + str(centreposition[1] + 10) + " F400\r\n"))
+    waitforposition()
+    Ender.write(str.encode("G1 X" + str(centreposition[0] - 10) + "E" + str(centreposition[1] - 10) + " F400\r\n"))
+    waitforposition()
+    Ender.write(str.encode("G1 X" + str(centreposition[0]) + "E" + str(centreposition[1]) + " F400\r\n"))
+    waitforposition()
+    Ender.write(str.encode("G1 X" + str(centreposition[0] - 10) + "E" + str(centreposition[1] + 10) + " F400\r\n"))
+    waitforposition()
+    Ender.write(str.encode("G1 X" + str(centreposition[0] + 10) + "E" + str(centreposition[1] - 10) + " F400\r\n"))
+
     Ender.write(str.encode("G1 Z" + str(centreposition[2] + retractheight) + " F400\r\n"))  # Lift up
+    Ender.write(str.encode("G1 E" + str(centreposition[1] + 50) + " F1000\r\n"))  # Present to camera
 
 setup()
 main()
