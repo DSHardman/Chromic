@@ -37,7 +37,7 @@ void loop() {
 
   scale.set_scale(calibration_factor);
   current_reading = (scale.get_units());
-  Serial.println(runningAverage(current_reading), 4);
-  delay(200);
+  Serial.println(0.00981*runningAverage(current_reading), 4); // Print in N
+  delay(500);
 
 }
