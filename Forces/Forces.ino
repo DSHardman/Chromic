@@ -1,7 +1,7 @@
 #include "HX711.h"
 
-#define DOUT  5
-#define CLK  6
+#define DOUT  8
+#define CLK  9
 
 HX711 scale;
 
@@ -37,6 +37,7 @@ void loop() {
 
   scale.set_scale(calibration_factor);
   current_reading = (scale.get_units());
+  // Serial.println(runningAverage(current_reading), 4);
   Serial.println(0.00981*runningAverage(current_reading), 4); // Print in N
   delay(500);
 

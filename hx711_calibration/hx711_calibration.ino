@@ -22,8 +22,8 @@ LiquidCrystal lcd(51, 50, 49, 48, 47, 46);
 
 #include "HX711.h"
 
-#define DOUT 5
-#define CLK  6
+#define DOUT 8
+#define CLK  9
 
 //HX711 scale(DOUT, CLK);
 HX711 scale;
