@@ -9,7 +9,8 @@ import imageio as iio
 
 centreposition = (114, 90, 7.5)
 targetforce = 3  # Maximum force in N
-step = 0.05  # Distance to move between force measurements
+retractheight = 15  # How far to lift up?
+step = 0.01  # Distance to move between force measurements
 
 Ender = serial.Serial("COM4", 250000)
 Forces = serial.Serial("COM17", 115200)
@@ -59,16 +60,15 @@ def takereading(targetforce):
         n += 1
         if n*step > 5:  # Do not descend further than 5 mm
             break
-    time.sleep(waittime)
+    # time.sleep(waittime)
     # Ender.write(str.encode("G1 Z" + str(centreposition[2] + retractheight) + " F400\r\n"))
     # waitforposition()
 
 
 def setup():
-    Ender.write(str.encode("M104 S35\r\n"))  # Set temperature
     Ender.write(str.encode("M92 E80\r\n"))  # Calibrate steps for Y axis
     Ender.write(str.encode("M302 P1\r\n"))  # Allow extruder driver to run without temperature checks
-    Ender.write(str.encode("G92 E0\r\n")) # Run relative to this Y position
+    Ender.write(str.encode("G92 E0\r\n"))  # Run relative to this Y position
     Ender.write(str.encode("G28 X Y\r\n"))  # Home X
     Ender.write(str.encode("G0 E130\r\n"))  # Go to Y position for homing
     Ender.write(str.encode("G28 X Z\r\n"))  # Home Z
@@ -82,8 +82,6 @@ def main():
 
     waitforposition()
     takereading(targetforce)  # Press to desired force
-    time.sleep(waittime)  # Wait for desired time
-
 
     Ender.write(str.encode("G1 Z" + str(centreposition[2] + retractheight) + " F4000\r\n"))  # Lift up
     Ender.write(str.encode("M18\r\n"))  # Disable steppers
