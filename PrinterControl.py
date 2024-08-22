@@ -15,7 +15,7 @@ retractheight = 10
 presentheight = 3
 
 target_forces = np.arange(0.5, 2.5, 0.5)
-target_temps = np.arange(45, 46, 1)
+target_temps = np.arange(30, 46, 1)
 
 # Load measured forces and create interpolation function
 with open('ForceCalibration.csv', 'r') as f:
